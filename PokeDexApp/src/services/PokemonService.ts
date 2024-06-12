@@ -1,6 +1,6 @@
 import { AxiosInstance, AxiosResponse } from "axios"
 import Pokemon from "../types/Pokemon"
-import { defaultAxiosInstance } from "./api"
+import { defaultAxiosInstance } from "./Api"
 
 const PokemonService = (api: AxiosInstance = defaultAxiosInstance) => ({
 

@@ -5,7 +5,9 @@ type PokemonStats = {
     HP: number,
     Attack: number,
     Defense: number,
-    "Sp. Attack": number,
-    "Sp. Defense": number,
+    SpAtk: number,
+    SpDef: number,
     Speed: number
 }
+
+export default PokemonStats
