@@ -10,7 +10,7 @@ export const defaultAxiosInstance: AxiosInstance = axios.create({
 });
 
 defaultAxiosInstance.interceptors.request.use(async (request) => {
-  const accessToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdpYW5sdWNhQG5vc2VyeW91bmcuY2giLCJpYXQiOjE3MTgxODE1MDgsImV4cCI6MTcxODE4NTEwOCwic3ViIjoiMiJ9.axoWA7RtctP7mWBv1NVzcp0vik3ob1Ub5BvAHO4Dbfk";
+  const accessToken = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdpYW5sdWNhQG5vc2VyeW91bmcuY2giLCJpYXQiOjE3MTgxOTA1MjksImV4cCI6MTcxODE5NDEyOSwic3ViIjoiMiJ9.GYwF5uuWucItPw-KBzUKFAoTOYQHfX3cX7KBS8cMX14";
 
   if (accessToken) {
     request.headers.Authorization = accessToken;

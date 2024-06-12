@@ -7,7 +7,6 @@ export default function PokemonDetails({ data }: { data: PokemonStats }) {
   return (
     <View style={styles.container}>
       <View style={styles.textContainer}>
-        /*
         <Text variant="bodyLarge" style={styles.text}>
           Hp:{" "}
         </Text>
@@ -38,10 +37,10 @@ export default function PokemonDetails({ data }: { data: PokemonStats }) {
           {data.Defense}
         </Text>
         <Text variant="bodyLarge" style={styles.textValue}>
-          {data.SpAtk}
+          {data["Sp. Attack"]}
         </Text>
         <Text variant="bodyLarge" style={styles.textValue}>
-          {data.SpDef}
+          {data["Sp. Defense"]}
         </Text>
         <Text variant="bodyLarge" style={styles.textValue}>
           {data.Speed}
@@ -53,6 +52,7 @@ export default function PokemonDetails({ data }: { data: PokemonStats }) {
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 10,
     display: "flex",
     flexDirection: "row",
   },

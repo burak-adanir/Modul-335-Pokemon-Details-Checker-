@@ -5,8 +5,8 @@ type PokemonStats = {
     HP: number,
     Attack: number,
     Defense: number,
-    SpAtk: number,
-    SpDef: number,
+    "Sp. Attack": number,
+    "Sp. Defense": number,
     Speed: number
 }
 

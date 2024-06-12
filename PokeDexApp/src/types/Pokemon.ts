@@ -10,7 +10,7 @@ type Pokemon = {
         french: string,
     },
     type: Element[]
-    stats: PokemonStats
+    base: PokemonStats
 }
 
 export default Pokemon
