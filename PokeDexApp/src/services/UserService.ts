@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosResponse } from "axios";
-import { defaultAxiosInstance } from "./api";
+import { defaultAxiosInstance } from "./Api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type User = {
@@ -15,7 +15,7 @@ type User = {
 
 const UserService = (api: AxiosInstance = defaultAxiosInstance) => ({
   getActiveToken: async () => {
-    const accessToken = await AsyncStorage.getItem("acces_token");
+    const accessToken = await AsyncStorage.getItem("access_token");
     if (accessToken) {
       return true;
     }

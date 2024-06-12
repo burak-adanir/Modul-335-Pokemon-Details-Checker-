@@ -1,23 +1,34 @@
 import * as React from 'react';
 import { StyleSheet, View } from "react-native";
-import BackgroundImage from "../atoms/BackgroundImageLight";
-import PasswordInput from "../atoms/PasswordInput";
-import EmailInput from "../atoms/EmailInput";
-import { Button, TextInput, Text } from "react-native-paper";
+import { TextInput, Button, Text } from "react-native-paper";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import UserService from '../../services/UserService';
+import BackgroundImage from "../atoms/BackgroundImageLight";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().email('Please enter a valid email !!!').required('Email is required'),
+  email: Yup.string().email('Please enter a valid email!').required('Email is required'),
   password: Yup.string().required('Password is required'),
 });
 
 export default function LoginPage() {
+  const [loginError, setLoginError] = React.useState('');
+
+  const handleLogin = async (values) => {
+    try {
+      const accessToken = await UserService().logIn(values.email, values.password);
+      console.log('Logged in successfully:', accessToken);
+    } catch (error) {
+      console.error('Login error:', error);
+      setLoginError('Invalid email or password. Please try again.');
+    }
+  };
+
   return (
     <Formik
       initialValues={{ email: '', password: '' }}
       validationSchema={validationSchema}
-      onSubmit={values => console.log(values)}
+      onSubmit={handleLogin}
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
         <View style={styles.container}>
@@ -69,6 +80,7 @@ export default function LoginPage() {
               {touched.password && errors.password && (
                 <Text style={styles.errorText}>{errors.password}</Text>
               )}
+              {loginError ? <Text style={styles.errorText}>{loginError}</Text> : null}
               <Button
                 style={styles.loginButton}
                 buttonColor="#3368B1"
