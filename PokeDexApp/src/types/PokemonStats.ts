@@ -9,3 +9,5 @@ type PokemonStats = {
     "Sp. Defense": number,
     Speed: number
 }
+
+export default PokemonStats

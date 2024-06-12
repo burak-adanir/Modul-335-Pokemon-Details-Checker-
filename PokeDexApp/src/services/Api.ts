@@ -13,7 +13,7 @@ defaultAxiosInstance.interceptors.request.use(async (request) => {
   const accessToken = await AsyncStorage.getItem(jwt);
 
   if (accessToken) {
-    request.headers.Authorization = accessToken;
+    request.headers.Authorization = `Bearer ${accessToken}`;
   }
   return request;
 });

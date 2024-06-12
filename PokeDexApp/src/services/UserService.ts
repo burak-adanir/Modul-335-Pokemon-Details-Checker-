@@ -1,5 +1,5 @@
 import { AxiosInstance, AxiosResponse } from "axios";
-import { defaultAxiosInstance } from "./api";
+import { defaultAxiosInstance } from "./Api";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type User = {

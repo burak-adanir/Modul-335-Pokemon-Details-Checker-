@@ -24,4 +24,9 @@ const styles = StyleSheet.create({
     height: "15%", 
     marginTop: 32
   },
+  logoImage: {
+    width: "100%",
+    height: "15%",
+    marginTop: 32,
+  },
 });
