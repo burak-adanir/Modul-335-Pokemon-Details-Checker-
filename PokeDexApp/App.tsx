@@ -1,7 +1,8 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View , Image} from 'react-native';
-import PokeBallButton from './src/components/atoms/PokeBallButton';
-import NavBar from './src/components/molecules/NavBar';
+import { StatusBar } from "expo-status-bar";
+import { StyleSheet, Text, View, Image } from "react-native";
+import PokeBallButton from "./src/components/atoms/PokeBallButton";
+import NavBar from "./src/components/molecules/NavBar";
+import React from "react";
 
 export default function App() {
   return (
@@ -15,14 +16,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#5C9CF7',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoImage: {
-    width: "100%", 
-    height: "15%", 
-    marginTop: 32
+    backgroundColor: "#5C9CF7",
+    alignItems: "center",
+    justifyContent: "center",
   },
   logoImage: {
     width: "100%",
