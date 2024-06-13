@@ -20,7 +20,7 @@ export default function LoginPage() {
     try {
       const accessToken = await UserService().logIn(values.email, values.password);
       if(accessToken){
-        navigation.navigate("/navbar");
+        navigation.navigate("/pokedex");
       }
       console.log('Logged in successfully:', accessToken);
     } catch (error) {

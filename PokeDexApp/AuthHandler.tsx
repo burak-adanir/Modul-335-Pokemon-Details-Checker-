@@ -10,7 +10,7 @@ const AuthHandler = () => {
       const hasToken = await UserService().getActiveToken();
       console.log("Has token:", hasToken);
       if (hasToken) {
-        navigation.navigate("/navbar");
+        navigation.navigate("/pokedex");
       } else {
         navigation.navigate("/login");
       }
