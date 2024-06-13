@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import {
   SafeAreaView,
   StyleSheet,
-  Image,
   ScrollView,
   ImageBackground,
   Dimensions,

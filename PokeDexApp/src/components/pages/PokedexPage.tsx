@@ -1,6 +1,5 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { useEffect, useState, useCallback } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { useState, useCallback } from "react";
 import { Searchbar } from "react-native-paper";
 import { useFocusEffect } from "@react-navigation/native";
 import Pokemon from "../../types/Pokemon";

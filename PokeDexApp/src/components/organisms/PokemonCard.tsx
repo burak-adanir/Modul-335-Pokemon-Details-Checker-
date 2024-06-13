@@ -1,17 +1,14 @@
 import React from "react";
-import { useState } from "react";
-import {
-  Card,
-  Dialog,
-  IconButton,
-  Paragraph,
-  Portal,
-} from "react-native-paper";
-import { FlatList, View, StyleSheet, Text, Image, Button } from "react-native";
+import { Card, IconButton } from "react-native-paper";
+import { View, StyleSheet, Text } from "react-native";
 import PokemonService from "../../services/PokemonService";
 import Pokemon from "../../types/Pokemon";
 import PokemonDetails from "../molecules/PokemonDetails";
 import { useNavigation } from "@react-navigation/native";
+
+/** Single card to view, edit and delete a pokemon.
+ *  @returns a Pokemon card component
+ */
 
 export default function PokemonCard({ pokemonData }: { pokemonData: Pokemon }) {
   const navigation = useNavigation<any>();

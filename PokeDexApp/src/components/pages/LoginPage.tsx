@@ -7,6 +7,10 @@ import { useNavigation } from "@react-navigation/native";
 import UserService from "../../services/UserService";
 import BackgroundImage from "../atoms/BackgroundImageLight";
 
+/** Log in page for returnig users. User passes the email and password
+ *  to log in
+ */
+
 const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Please enter a valid email!")
