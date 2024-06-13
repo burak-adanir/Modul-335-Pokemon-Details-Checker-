@@ -1,44 +1,65 @@
-import * as React from 'react';
+import * as React from "react";
 import { StyleSheet, View } from "react-native";
 import BackgroundImage from "../atoms/BackgroundImageLight";
 import { Button, TextInput, Text } from "react-native-paper";
-import { Formik } from 'formik';
-import * as Yup from 'yup';
-import UserService from '../../services/UserService';
-import { useNavigation } from '@react-navigation/native';
+import { Formik } from "formik";
+import * as Yup from "yup";
+import UserService from "../../services/UserService";
+import { useNavigation } from "@react-navigation/native";
 
 const validationSchema = Yup.object().shape({
-  email: Yup.string().email('Please enter a valid email !!!').required('Email is required'),
-  password: Yup.string().required('Password is required'),
-  firstName: Yup.string().required('First name is required'),
-  lastName: Yup.string().required('Last name is required'),
+  email: Yup.string()
+    .email("Please enter a valid email !!!")
+    .required("Email is required"),
+  password: Yup.string().required("Password is required"),
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
   age: Yup.string()
-    .matches(/^[0-9]+$/, 'Age must contain only numbers')
-    .required('Age is required'),
+    .matches(/^[0-9]+$/, "Age must contain only numbers")
+    .required("Age is required"),
 });
 
 export default function RegisterPage() {
   const navigation = useNavigation();
-  const [registerError, setRegisterError] = React.useState('');
+  const [registerError, setRegisterError] = React.useState("");
 
   const handleRegister = async (values) => {
     try {
-      const accessToken = await UserService().signUp(values.email, values.password, values.firstName, values.lastName, values.age);
-      console.log('Registered successfully:', accessToken);
-      navigation.navigate('/pokedex');
+      const accessToken = await UserService().signUp(
+        values.email,
+        values.password,
+        values.firstName,
+        values.lastName,
+        values.age
+      );
+      console.log("Registered successfully:", accessToken);
+      navigation.navigate("/pokedex");
     } catch (error) {
-      console.error('Registration error:', error);
-      setRegisterError('Registration failed. Please try again.');
+      console.error("Registration error:", error);
+      setRegisterError("Registration failed. Please try again.");
     }
   };
 
   return (
     <Formik
-      initialValues={{ email: '', password: '', firstName: '', lastName: '', age: '' }}
+      initialValues={{
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        age: "",
+      }}
       validationSchema={validationSchema}
       onSubmit={handleRegister}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
+      {({
+        handleChange,
+        handleBlur,
+        handleSubmit,
+        values,
+        errors,
+        touched,
+      }) => (
         <View style={styles.container}>
           <BackgroundImage />
           <View style={styles.overlay}>
@@ -47,19 +68,19 @@ export default function RegisterPage() {
                 mode="outlined"
                 placeholder="Email"
                 placeholderTextColor="#FFFFFF"
-                textColor='#FFFFFF'
+                textColor="#FFFFFF"
                 value={values.email}
-                onChangeText={handleChange('email')}
-                onBlur={handleBlur('email')}
+                onChangeText={handleChange("email")}
+                onBlur={handleBlur("email")}
                 style={styles.input}
                 theme={{
                   colors: {
-                    text: '#FFFFFF',
-                    primary: '#FFFFFF',
-                    background: 'rgba(0, 0, 0, 0.2)',
-                    placeholder: '#FFFFFF',
-                    outline: '#FFFFFF'
-                  }
+                    text: "#FFFFFF",
+                    primary: "#FFFFFF",
+                    background: "rgba(0, 0, 0, 0.2)",
+                    placeholder: "#FFFFFF",
+                    outline: "#FFFFFF",
+                  },
                 }}
               />
               {touched.email && errors.email && (
@@ -70,19 +91,19 @@ export default function RegisterPage() {
                 placeholder="Password"
                 placeholderTextColor="#FFFFFF"
                 secureTextEntry
-                textColor='#FFFFFF'
+                textColor="#FFFFFF"
                 value={values.password}
-                onChangeText={handleChange('password')}
-                onBlur={handleBlur('password')}
+                onChangeText={handleChange("password")}
+                onBlur={handleBlur("password")}
                 style={styles.input}
                 theme={{
                   colors: {
-                    text: '#FFFFFF',
-                    primary: '#FFFFFF',
-                    background: 'rgba(0, 0, 0, 0.2)',
-                    placeholder: '#FFFFFF',
-                    outline: '#FFFFFF'
-                  }
+                    text: "#FFFFFF",
+                    primary: "#FFFFFF",
+                    background: "rgba(0, 0, 0, 0.2)",
+                    placeholder: "#FFFFFF",
+                    outline: "#FFFFFF",
+                  },
                 }}
               />
               {touched.password && errors.password && (
@@ -92,19 +113,19 @@ export default function RegisterPage() {
                 mode="outlined"
                 placeholder="First Name"
                 placeholderTextColor="#FFFFFF"
-                textColor='#FFFFFF'
+                textColor="#FFFFFF"
                 value={values.firstName}
-                onChangeText={handleChange('firstName')}
-                onBlur={handleBlur('firstName')}
+                onChangeText={handleChange("firstName")}
+                onBlur={handleBlur("firstName")}
                 style={styles.input}
                 theme={{
                   colors: {
-                    text: '#FFFFFF',
-                    primary: '#FFFFFF',
-                    background: 'rgba(0, 0, 0, 0.2)',
-                    placeholder: '#FFFFFF',
-                    outline: '#FFFFFF'
-                  }
+                    text: "#FFFFFF",
+                    primary: "#FFFFFF",
+                    background: "rgba(0, 0, 0, 0.2)",
+                    placeholder: "#FFFFFF",
+                    outline: "#FFFFFF",
+                  },
                 }}
               />
               {touched.firstName && errors.firstName && (
@@ -114,19 +135,19 @@ export default function RegisterPage() {
                 mode="outlined"
                 placeholder="Last Name"
                 placeholderTextColor="#FFFFFF"
-                textColor='#FFFFFF'
+                textColor="#FFFFFF"
                 value={values.lastName}
-                onChangeText={handleChange('lastName')}
-                onBlur={handleBlur('lastName')}
+                onChangeText={handleChange("lastName")}
+                onBlur={handleBlur("lastName")}
                 style={styles.input}
                 theme={{
                   colors: {
-                    text: '#FFFFFF',
-                    primary: '#FFFFFF',
-                    background: 'rgba(0, 0, 0, 0.2)',
-                    placeholder: '#FFFFFF',
-                    outline: '#FFFFFF'
-                  }
+                    text: "#FFFFFF",
+                    primary: "#FFFFFF",
+                    background: "rgba(0, 0, 0, 0.2)",
+                    placeholder: "#FFFFFF",
+                    outline: "#FFFFFF",
+                  },
                 }}
               />
               {touched.lastName && errors.lastName && (
@@ -136,25 +157,27 @@ export default function RegisterPage() {
                 mode="outlined"
                 placeholder="Age"
                 placeholderTextColor="#FFFFFF"
-                textColor='#FFFFFF'
+                textColor="#FFFFFF"
                 value={values.age}
-                onChangeText={handleChange('age')}
-                onBlur={handleBlur('age')}
+                onChangeText={handleChange("age")}
+                onBlur={handleBlur("age")}
                 style={styles.input}
                 theme={{
                   colors: {
-                    text: '#FFFFFF',
-                    primary: '#FFFFFF',
-                    background: 'rgba(0, 0, 0, 0.2)',
-                    placeholder: '#FFFFFF',
-                    outline: '#FFFFFF'
-                  }
+                    text: "#FFFFFF",
+                    primary: "#FFFFFF",
+                    background: "rgba(0, 0, 0, 0.2)",
+                    placeholder: "#FFFFFF",
+                    outline: "#FFFFFF",
+                  },
                 }}
               />
               {touched.age && errors.age && (
                 <Text style={styles.errorText}>{errors.age}</Text>
               )}
-              {registerError ? <Text style={styles.errorText}>{registerError}</Text> : null}
+              {registerError ? (
+                <Text style={styles.errorText}>{registerError}</Text>
+              ) : null}
               <Button
                 style={styles.registerButton}
                 buttonColor="#3368B1"
@@ -167,7 +190,7 @@ export default function RegisterPage() {
                 style={styles.loginSwitchButton}
                 buttonColor="#E3B507"
                 mode="contained"
-                onPress={() => navigation.navigate('/login')}
+                onPress={() => navigation.navigate("/login")}
               >
                 Already have an account?
               </Button>
@@ -186,23 +209,23 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   overlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     bottom: 0,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
   },
   inputContainer: {
     zIndex: 1,
-    width: '70%',
-    marginTop: '10%',
+    width: "70%",
+    marginTop: "10%",
   },
   input: {
-    fontStyle: 'normal',
-    fontWeight: '400',
-    color: '#FFFFFF',
+    fontStyle: "normal",
+    fontWeight: "400",
+    color: "#FFFFFF",
     fontSize: 16,
     lineHeight: 24,
     letterSpacing: 0.5,
@@ -210,18 +233,18 @@ const styles = StyleSheet.create({
   },
   registerButton: {
     width: 120,
-    alignSelf: 'center',
-    marginTop: '10%',
+    alignSelf: "center",
+    marginTop: "10%",
   },
   loginSwitchButton: {
     position: "absolute",
     width: 200,
-    alignSelf: 'center',
+    alignSelf: "center",
     bottom: -150,
   },
   errorText: {
-    color: '#D62D2D',
-    fontWeight: '700',
-    textShadowColor: '#fff',
+    color: "#fff",
+    marginTop: -10,
+    marginBottom: 10,
   },
 });

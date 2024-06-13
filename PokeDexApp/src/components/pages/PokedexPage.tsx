@@ -33,25 +33,26 @@ export default function PokedexPage() {
   }, []);
 
   return (
-      <View style={styles.container}>
-        <Searchbar
-          style={styles.searchBar}
-          placeholder="Search"
-          onChangeText={onChangeSearch}
-          value={searchQuery}
-        />
-        <FlatList
-          data={filteredList}
-          renderItem={({ item }) => <PokemonCard pokemonData={item} />}
-          keyExtractor={(item) => `${item.id}`}
-        />
-        <NavBar />
-      </View>
+    <View style={styles.container}>
+      <Searchbar
+        style={styles.searchBar}
+        placeholder="Search"
+        onChangeText={onChangeSearch}
+        value={searchQuery}
+      />
+      <FlatList
+        data={filteredList}
+        renderItem={({ item }) => <PokemonCard pokemonData={item} />}
+        keyExtractor={(item) => `${item.id}`}
+      />
+      <NavBar />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
+    marginTop: 20,
     flex: 1,
     backgroundColor: "#f5f5f5",
     padding: 10,
@@ -65,10 +66,5 @@ const styles = StyleSheet.create({
     marginTop: 16,
     backgroundColor: "rgba(255, 255, 255, 0.2)",
     color: "white",
-  },
-  screen: {
-    flex: 1,
-    width: "100%",
-    paddingHorizontal: 20,
   },
 });
