@@ -5,9 +5,14 @@ import { Searchbar } from "react-native-paper";
 import Pokemon from "../../types/Pokemon";
 import PokemonService from "../../services/PokemonService";
 import PokemonCard from "../organisms/PokemonCard";
+import NavBar from "../molecules/NavBar";
 
 export default function PokedexPage() {
   const [searchQuery, setSearchQuery] = useState("");
+  const [filteredList, setFilteredList] = useState<Pokemon[]>([]);
+  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
+
   const onChangeSearch = (query: string) => {
     setSearchQuery(query);
     const newlist = pokemonList.filter((pokemon) =>
@@ -15,10 +20,6 @@ export default function PokedexPage() {
     );
     setFilteredList(newlist);
   };
-
-  const [filterdList, setFilteredList] = useState<Pokemon[]>([]);
-  const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const [refreshing, setRefreshing] = useState(false);
 
   useEffect(() => {
     PokemonService()
@@ -28,10 +29,9 @@ export default function PokedexPage() {
         setFilteredList(value.data);
       })
       .catch((error) => console.log(error));
-  });
+  }, []);
 
   return (
-    <SafeAreaView style={[styles.screen]}>
       <View style={styles.container}>
         <Searchbar
           style={styles.searchBar}
@@ -40,12 +40,12 @@ export default function PokedexPage() {
           value={searchQuery}
         />
         <FlatList
-          data={pokemonList}
+          data={filteredList}
           renderItem={({ item }) => <PokemonCard pokemonData={item} />}
           keyExtractor={(item) => `${item.id}`}
         />
+        <NavBar />
       </View>
-    </SafeAreaView>
   );
 }
 
