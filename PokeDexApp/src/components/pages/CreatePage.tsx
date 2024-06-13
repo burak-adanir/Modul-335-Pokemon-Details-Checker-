@@ -139,7 +139,7 @@ export default function CreatePage() {
     <SafeAreaView style={[styles.screen]}>
       <ImageBackground />
       <Appbar.Header style={[styles.topAppBar]}>
-        <Appbar.BackAction onPress={() => navigation.goBack()} />
+        <Appbar.BackAction color="white" onPress={() => navigation.goBack()} />
       </Appbar.Header>
       <View style={styles.titleContainer}>
         <Text style={styles.title}>{title}</Text>
