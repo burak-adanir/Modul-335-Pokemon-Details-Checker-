@@ -1,11 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
+S<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="044f2253-fa9a-4ced-9602-fac08976c9d9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/AuthHandler.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/pages/ProfilePage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/App.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/molecules/NavBar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/molecules/NavBar.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/pages/LoginPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/pages/LoginPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/UserService.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/UserService.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +47,7 @@
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
     "com.google.services.firebase.aqiPopupShown": "true",
-    "git-widget-placeholder": "dev",
+    "git-widget-placeholder": "feature/navigationpage",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Source/Modul-335-Pokemon-Details-Checker-/PokeDexApp",
     "settings.editor.selected.configurable": "reference.settings.ide.settings.file-colors"

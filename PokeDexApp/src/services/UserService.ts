@@ -15,7 +15,7 @@ type User = {
 
 const UserService = (api: AxiosInstance = defaultAxiosInstance) => ({
   getActiveToken: async () => {
-    const accessToken = await AsyncStorage.getItem("acces_token");
+    const accessToken = await AsyncStorage.getItem("access_token");
     if (accessToken) {
       return true;
     }
