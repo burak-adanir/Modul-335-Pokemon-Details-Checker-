@@ -19,6 +19,9 @@ export default function LoginPage() {
   const handleLogin = async (values) => {
     try {
       const accessToken = await UserService().logIn(values.email, values.password);
+      if(accessToken){
+        navigation.navigate("/navbar");
+      }
       console.log('Logged in successfully:', accessToken);
     } catch (error) {
       console.error('Login error:', error);

@@ -25,10 +25,9 @@ export default function App() {
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="AuthHandler" component={AuthHandler} />
           <Stack.Screen name="/login" component={LoginPage} />
-          <Stack.Screen name="/navbar" component={NavBar} />
+          <Stack.Screen name="/navbar" component={PokedexPage} />
           <Stack.Screen name="/profile" component={ProfilePage} />
           <Stack.Screen name="/register" component={RegisterPage} />
-          <Stack.Screen name="/pokemons" component={PokedexPage} />
           <Stack.Screen name="/create" component={CreatePage} />
         </Stack.Navigator>
       </NavigationContainer>

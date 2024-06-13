@@ -61,6 +61,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    bottom: 0,
+    left: 0,
+    right:0,
+    position: "absolute",
   },
   svg: {
     position: "absolute",
@@ -72,6 +76,8 @@ const styles = StyleSheet.create({
   button: {
     position: "relative",
     bottom: 0,
+    left: 1,
+    right: 0,
   },
   buttonText: {
     color: "grey",

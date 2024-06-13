@@ -29,8 +29,8 @@ export default function ProfilePage() {
       if (userDetails) {
         const user = JSON.parse(userDetails);
         setEmail(user.email);
-        setFirstName(user.firstName || '');
-        setLastName(user.lastName || '');
+        setFirstName(user.firstname || '');
+        setLastName(user.lastname || '');
         setAge(user.age.toString());
       }
     };
