@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useEffect, useState } from "react";
 import UserService from "./src/services/UserService";
 import LoginPage from "./src/components/pages/LoginPage";
+import ProfilePage from "./src/components/pages/ProfilePage";
 import NavBar from './src/components/molecules/NavBar';
 import AuthHandler from './AuthHandler'; // Import the AuthHandler component
 import RegisterPage from './src/components/pages/RegisterPage';
@@ -25,23 +26,10 @@ export default function App() {
           <Stack.Screen name="AuthHandler" component={AuthHandler} />
           <Stack.Screen name="/login" component={LoginPage} />
           <Stack.Screen name="/navbar" component={NavBar} />
+          <Stack.Screen name="/profile" component={ProfilePage} />
           <Stack.Screen name="/register" component={RegisterPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoImage: {
-    width: "100%",
-    height: "15%",
-    marginTop: 32
-  },
-});

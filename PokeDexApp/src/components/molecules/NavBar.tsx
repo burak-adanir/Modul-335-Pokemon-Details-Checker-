@@ -14,27 +14,17 @@ import ProfileButton from "../atoms/ProfileButton";
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import UserService from "../../services/UserService";
+import { useNavigation } from "@react-navigation/native";
 
 
 
 const screenWidth = Dimensions.get("window").width;
 
 export default function NavBar() {
-  const handleLogout = async () => {
-    try {
-      await UserService().logOut();
-      console.log('Logged out successfully');
-      // Perform any other actions needed after logout, e.g., redirect to login page
-    } catch (error) {
-      console.error('Logout error:', error);
-      // Handle logout error if needed
-    }
-  }
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
-        <Text style={styles.logoutButtonText}>Logout</Text>
-      </TouchableOpacity>
       <Svg height="80" style={styles.svg} viewBox="0 0 424 69">
         <Path
           fill="white"
@@ -47,7 +37,7 @@ export default function NavBar() {
             r="45"
             fill="gray"
             opacity="0"
-            onPress={(e) => console.log("home button clicked")}
+            onPress={(e) => navigation.navigate("/navbar")}
           />
           <ProfileButton />
           <Circle
@@ -56,6 +46,7 @@ export default function NavBar() {
             r="45"
             fill="gray"
             opacity="0"
+            onPress={(e) => navigation.navigate("/profile")}
            />
       </Svg>
       <View style={styles.button}>
@@ -98,3 +89,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 });
+
