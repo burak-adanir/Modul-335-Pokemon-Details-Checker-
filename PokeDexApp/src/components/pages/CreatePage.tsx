@@ -58,7 +58,7 @@ export default function CreatePage() {
   }, []);
 
   const navigateBackToPage = () => {
-    navigation.navigate("/pokemons");
+    navigation.navigate("/pokedex");
   };
 
   const typeCasing = (string: string): string => {

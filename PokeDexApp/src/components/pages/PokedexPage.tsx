@@ -1,7 +1,8 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Searchbar } from "react-native-paper";
+import { useFocusEffect } from "@react-navigation/native";
 import Pokemon from "../../types/Pokemon";
 import PokemonService from "../../services/PokemonService";
 import PokemonCard from "../organisms/PokemonCard";
@@ -16,21 +17,30 @@ export default function PokedexPage() {
 
   const onChangeSearch = (query: string) => {
     setSearchQuery(query);
-    const newlist = pokemonList.filter((pokemon) =>
+    const newList = pokemonList.filter((pokemon) =>
       pokemon.name.english.toLowerCase().includes(query.toLowerCase())
     );
-    setFilteredList(newlist);
+    setFilteredList(newList);
   };
 
-  useEffect(() => {
-    PokemonService()
-      .getAll()
-      .then((value) => {
-        setPokemonList(value.data);
-        setFilteredList(value.data);
-      })
-      .catch((error) => console.log(error));
-  }, []);
+  const fetchPokemonList = async () => {
+    try {
+      setRefreshing(true);
+      const response = await PokemonService().getAll();
+      setPokemonList(response.data);
+      setFilteredList(response.data);
+      setRefreshing(false);
+    } catch (error) {
+      console.log(error);
+      setRefreshing(false);
+    }
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchPokemonList();
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
@@ -44,6 +54,8 @@ export default function PokedexPage() {
         data={filteredList}
         renderItem={({ item }) => <PokemonCard pokemonData={item} />}
         keyExtractor={(item) => `${item.id}`}
+        refreshing={refreshing}
+        onRefresh={fetchPokemonList}
       />
       <NavBar />
     </View>
