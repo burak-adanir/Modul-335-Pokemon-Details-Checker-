@@ -11,14 +11,24 @@ import { FlatList, View, StyleSheet, Text, Image, Button } from "react-native";
 import PokemonService from "../../services/PokemonService";
 import Pokemon from "../../types/Pokemon";
 import PokemonDetails from "../molecules/PokemonDetails";
+import { useNavigation } from "@react-navigation/native";
 
 export default function PokemonCard({ pokemonData }: { pokemonData: Pokemon }) {
+  const navigation = useNavigation<any>();
+
   const handleDelete = (pokemon: Pokemon) => {
     PokemonService()
       .delete(pokemon.id!)
       .then(() => {
         console.log("Pokemon deleted");
       });
+  };
+
+  const handleUpdate = (pokemon: Pokemon) => {
+    navigation.navigate("/create", {
+      pokemonId: pokemon.id,
+      title: "Update Pokemon",
+    });
   };
 
   return (
@@ -49,9 +59,14 @@ export default function PokemonCard({ pokemonData }: { pokemonData: Pokemon }) {
               icon="pencil"
               mode="outlined"
               style={styles.icons}
-              onPress={() => handleDelete(pokemonData)}
+              onPress={() => handleUpdate(pokemonData)}
             />
-            <IconButton icon="delete" mode="outlined" style={styles.icons} />
+            <IconButton
+              onPress={() => handleDelete(pokemonData)}
+              icon="delete"
+              mode="outlined"
+              style={styles.icons}
+            />
           </Card.Actions>
         </Card.Content>
       </Card>

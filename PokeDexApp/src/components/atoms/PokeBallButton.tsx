@@ -10,7 +10,6 @@ export default function PokeBallButton() {
         onPress={() =>
           navigation.navigate("/create", {
             pokemonId: undefined,
-            buttonText: "Create",
             title: "Create Pokemon",
           })
         }

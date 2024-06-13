@@ -22,10 +22,15 @@ import {
   useRoute,
 } from "@react-navigation/native";
 
-export default function CreateEditPage() {
+/** Page to either Create a new pokemon or update an existing pokemon depending on the data given
+ *  @param pokemonId if defined, edit page will be displayed, else create page will be displayed
+ *  @param title string for page's title text
+ */
+
+export default function CreatePage() {
   const route = useRoute<any>();
   const navigation = useNavigation();
-  const { buttonText, pokemonId, title } = route.params;
+  const { pokemonId, title } = route.params;
 
   useEffect(() => {
     if (pokemonId !== undefined) {
@@ -386,7 +391,7 @@ export default function CreateEditPage() {
             formik.handleSubmit();
           }}
         >
-          {buttonText}
+          Submit
         </Button>
       </ScrollView>
     </SafeAreaView>
