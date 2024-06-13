@@ -1,3 +1,6 @@
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Provider as PaperProvider } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import { createMaterialBottomTabNavigator } from "react-native-paper/react-navigation";
@@ -32,7 +35,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#5C9CF7',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
