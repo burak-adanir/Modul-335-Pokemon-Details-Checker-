@@ -4,6 +4,8 @@ import BackgroundImage from "../atoms/BackgroundImageLight";
 import { Button, TextInput, Text } from "react-native-paper";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import UserService from '../../services/UserService';
+import { useNavigation } from '@react-navigation/native';
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().email('Please enter a valid email !!!').required('Email is required'),
@@ -16,11 +18,25 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function RegisterPage() {
+  const navigation = useNavigation();
+  const [registerError, setRegisterError] = React.useState('');
+
+  const handleRegister = async (values) => {
+    try {
+      const accessToken = await UserService().signUp(values.email, values.password, values.firstName, values.lastName, values.age);
+      console.log('Registered successfully:', accessToken);
+      navigation.navigate('/navbar');
+    } catch (error) {
+      console.error('Registration error:', error);
+      setRegisterError('Registration failed. Please try again.');
+    }
+  };
+
   return (
     <Formik
       initialValues={{ email: '', password: '', firstName: '', lastName: '', age: '' }}
       validationSchema={validationSchema}
-      onSubmit={values => console.log(values)}
+      onSubmit={handleRegister}
     >
       {({ handleChange, handleBlur, handleSubmit, values, errors, touched }) => (
         <View style={styles.container}>
@@ -138,6 +154,7 @@ export default function RegisterPage() {
               {touched.age && errors.age && (
                 <Text style={styles.errorText}>{errors.age}</Text>
               )}
+              {registerError ? <Text style={styles.errorText}>{registerError}</Text> : null}
               <Button
                 style={styles.registerButton}
                 buttonColor="#3368B1"
@@ -150,7 +167,7 @@ export default function RegisterPage() {
                 style={styles.loginSwitchButton}
                 buttonColor="#E3B507"
                 mode="contained"
-                onPress={() => console.log('Login Pressed')}
+                onPress={() => navigation.navigate('/login')}
               >
                 Already have an account?
               </Button>

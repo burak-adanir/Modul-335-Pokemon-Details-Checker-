@@ -10,6 +10,7 @@ import UserService from "./src/services/UserService";
 import LoginPage from "./src/components/pages/LoginPage";
 import NavBar from './src/components/molecules/NavBar';
 import AuthHandler from './AuthHandler'; // Import the AuthHandler component
+import RegisterPage from './src/components/pages/RegisterPage';
 
 const Tab = createMaterialBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -24,6 +25,7 @@ export default function App() {
           <Stack.Screen name="AuthHandler" component={AuthHandler} />
           <Stack.Screen name="/login" component={LoginPage} />
           <Stack.Screen name="/navbar" component={NavBar} />
+          <Stack.Screen name="/register" component={RegisterPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </PaperProvider>
