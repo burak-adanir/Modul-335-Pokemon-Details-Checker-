@@ -17,8 +17,6 @@ const AuthHandler = () => {
     };
 
     checkToken();
-    const intervalId = setInterval(checkToken, 1000);
-    return () => clearInterval(intervalId);
   }, [navigation]);
 
   return null;
