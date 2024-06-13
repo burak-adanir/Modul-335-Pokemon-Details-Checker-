@@ -26,7 +26,7 @@ export default function PokemonCard({ pokemonData }: { pokemonData: Pokemon }) {
 
   const handleUpdate = (pokemon: Pokemon) => {
     navigation.navigate("/create", {
-      pokemonId: pokemon.id,
+      id: pokemon.id,
       title: "Update Pokemon",
     });
   };

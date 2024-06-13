@@ -9,7 +9,7 @@ export default function PokeBallButton() {
       <TouchableOpacity
         onPress={() =>
           navigation.navigate("/create", {
-            pokemonId: undefined,
+            id: undefined,
             title: "Create Pokemon",
           })
         }

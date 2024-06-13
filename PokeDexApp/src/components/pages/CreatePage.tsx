@@ -23,19 +23,21 @@ import {
 } from "@react-navigation/native";
 
 /** Page to either Create a new pokemon or update an existing pokemon depending on the data given
- *  @param pokemonId if defined, edit page will be displayed, else create page will be displayed
+ *  @param id if defined, edit page will be displayed, else create page will be displayed
  *  @param title string for page's title text
  */
 
 export default function CreatePage() {
-  const route = useRoute<any>();
   const navigation = useNavigation();
-  const { pokemonId, title } = route.params;
+  const route = useRoute<any>();
+  const { id, title } = route.params;
 
+  /** If the id is defined, get the current pokemon data for update method
+   */
   useEffect(() => {
-    if (pokemonId !== undefined) {
+    if (id !== undefined) {
       PokemonService()
-        .getById(pokemonId)
+        .getById(id)
         .then((value: AxiosResponse<PokemonType>) => {
           formik.setValues({
             name: value.data.name.english,
@@ -59,6 +61,9 @@ export default function CreatePage() {
     navigation.navigate("/pokemons");
   };
 
+  /** On submit if pokemon is defined it will update any new values, else if will create a new
+   *  pokemon with the values provided
+   */
   const onSubmit = (values: formikValues) => {
     const types: Element[] = [];
     types.push(values.type as Element);
@@ -83,7 +88,7 @@ export default function CreatePage() {
       },
     };
 
-    if (pokemonId === undefined) {
+    if (id === undefined) {
       PokemonService()
         .create(newPokemon)
         .then((_value) => {
@@ -92,9 +97,9 @@ export default function CreatePage() {
         })
         .catch((error: AxiosError) => console.log(error.message));
     } else {
-      newPokemon.id = pokemonId;
+      newPokemon.id = id;
       PokemonService()
-        .update(pokemonId, newPokemon)
+        .update(id, newPokemon)
         .then((_value) => {
           navigateBackToPage();
           navigation.goBack();
@@ -403,7 +408,7 @@ const styles = StyleSheet.create({
     display: "flex",
     width: "100%",
     height: "100%",
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    backgroundColor: "rgb(42, 42, 42)",
   },
   listScreen: {
     paddingHorizontal: 64,
