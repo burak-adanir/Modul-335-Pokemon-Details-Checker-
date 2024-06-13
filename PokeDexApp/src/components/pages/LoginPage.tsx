@@ -3,6 +3,7 @@ import { StyleSheet, View } from "react-native";
 import { TextInput, Button, Text } from "react-native-paper";
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { useNavigation } from '@react-navigation/native';
 import UserService from '../../services/UserService';
 import BackgroundImage from "../atoms/BackgroundImageLight";
 
@@ -12,6 +13,7 @@ const validationSchema = Yup.object().shape({
 });
 
 export default function LoginPage() {
+  const navigation = useNavigation();
   const [loginError, setLoginError] = React.useState('');
 
   const handleLogin = async (values) => {
@@ -93,7 +95,7 @@ export default function LoginPage() {
                 style={styles.registerButton}
                 buttonColor="#E3B507"
                 mode="contained"
-                onPress={() => console.log('Register Pressed')}
+                onPress={() => navigation.navigate('/register')}
               >
                 No account yet?
               </Button>
