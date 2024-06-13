@@ -25,15 +25,9 @@ export default function RegisterPage() {
 
   const handleRegister = async (values) => {
     try {
-      const accessToken = await UserService().signUp(
-        values.email,
-        values.password,
-        values.firstName,
-        values.lastName,
-        values.age
-      );
-      console.log("Registered successfully:", accessToken);
-      navigation.navigate("/navbar");
+      const accessToken = await UserService().signUp(values.email, values.password, values.firstName, values.lastName, values.age);
+      console.log('Registered successfully:', accessToken);
+      navigation.navigate('/pokedex');
     } catch (error) {
       console.error("Registration error:", error);
       setRegisterError("Registration failed. Please try again.");

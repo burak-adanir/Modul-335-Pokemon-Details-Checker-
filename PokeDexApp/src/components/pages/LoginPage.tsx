@@ -20,11 +20,11 @@ export default function LoginPage() {
 
   const handleLogin = async (values) => {
     try {
-      const accessToken = await UserService().logIn(
-        values.email,
-        values.password
-      );
-      console.log("Logged in successfully:", accessToken);
+      const accessToken = await UserService().logIn(values.email, values.password);
+      if(accessToken){
+        navigation.navigate("/pokedex");
+      }
+      console.log('Logged in successfully:', accessToken);
     } catch (error) {
       console.error("Login error:", error);
       setLoginError("Invalid email or password. Please try again.");

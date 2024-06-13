@@ -8,12 +8,8 @@ import {
 } from "react-native";
 import Svg, { Path , Circle } from "react-native-svg";
 import PokeBallButton from "../atoms/PokeBallButton";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import HomeButton from "../atoms/HomeButton";
 import ProfileButton from "../atoms/ProfileButton";
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import UserService from "../../services/UserService";
 import { useNavigation } from "@react-navigation/native";
 
 
@@ -37,7 +33,7 @@ export default function NavBar() {
             r="45"
             fill="gray"
             opacity="0"
-            onPress={(e) => navigation.navigate("/navbar")}
+            onPress={(e) => navigation.navigate("/pokedex")}
           />
           <ProfileButton />
           <Circle
@@ -61,6 +57,10 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
+    bottom: 0,
+    left: 0,
+    right:0,
+    position: "absolute",
   },
   svg: {
     position: "absolute",
@@ -72,6 +72,8 @@ const styles = StyleSheet.create({
   button: {
     position: "relative",
     bottom: 0,
+    left: 1,
+    right: 0,
   },
   buttonText: {
     color: "grey",

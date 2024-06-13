@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import BackgroundImage from "../atoms/BackgroundImageLight";
 import { useNavigation } from "@react-navigation/native";
 import NavBar from "../molecules/NavBar";
 import { TextInput, Button } from "react-native-paper";
@@ -29,8 +28,8 @@ export default function ProfilePage() {
       if (userDetails) {
         const user = JSON.parse(userDetails);
         setEmail(user.email);
-        setFirstName(user.firstName || '');
-        setLastName(user.lastName || '');
+        setFirstName(user.firstname || '');
+        setLastName(user.lastname || '');
         setAge(user.age.toString());
       }
     };
@@ -40,7 +39,7 @@ export default function ProfilePage() {
 
   const handleUpdate = async () => {
     console.log('Updated credentials');
-    navigation.navigate("/navbar");
+    navigation.navigate("/pokedex");
   };
 
   const handleLogout = async () => {
