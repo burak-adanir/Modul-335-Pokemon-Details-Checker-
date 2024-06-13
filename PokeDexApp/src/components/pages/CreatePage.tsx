@@ -61,6 +61,10 @@ export default function CreatePage() {
     navigation.navigate("/pokemons");
   };
 
+  const typeCasing = (string: string): string => {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  };
+
   /** On submit if pokemon is defined it will update any new values, else if will create a new
    *  pokemon with the values provided
    */
@@ -179,7 +183,7 @@ export default function CreatePage() {
           mode="outlined"
           error={formik.errors.type !== undefined}
           onChangeText={(type: string) => {
-            formik.setFieldValue("type", type).then((_) => {
+            formik.setFieldValue("type", typeCasing(type)).then((_) => {
               formik.validateField("type");
             });
           }}
@@ -205,7 +209,7 @@ export default function CreatePage() {
           mode="outlined"
           error={formik.errors.secondType !== undefined}
           onChangeText={(type: string) => {
-            formik.setFieldValue("secondType", type).then((_) => {
+            formik.setFieldValue("secondType", typeCasing(type)).then((_) => {
               formik.validateField("secondType");
             });
           }}
