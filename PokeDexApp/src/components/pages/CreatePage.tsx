@@ -1,29 +1,44 @@
 import React, { useEffect } from "react";
-import { SafeAreaView, StyleSheet, ScrollView, Dimensions } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Image,
+  ScrollView,
+  ImageBackground,
+  Dimensions,
+  Text,
+  View,
+} from "react-native";
 import { Appbar, Button, HelperText, TextInput } from "react-native-paper";
+import Element, { TYPE } from "../../types/Element";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import PokemonType from "../../types/Pokemon";
 import PokemonService from "../../services/PokemonService";
+import { AxiosError, AxiosResponse } from "axios";
 import {
   CommonActions,
   useNavigation,
   useRoute,
 } from "@react-navigation/native";
-import Pokemon from "../../types/Pokemon";
-import { AxiosError, AxiosResponse } from "axios";
-import Element from "../../types/Element";
-import { TYPE } from "../../types/Element";
+
+/** Page to either Create a new pokemon or update an existing pokemon depending on the data given
+ *  @param id if defined, edit page will be displayed, else create page will be displayed
+ *  @param title string for page's title text
+ */
 
 export default function CreatePage() {
+  const navigation = useNavigation();
   const route = useRoute<any>();
-  const navigation = useNavigation<any>();
-  const { buttonText, pokemonId } = route.params;
+  const { id, title } = route.params;
 
+  /** If the id is defined, get the current pokemon data for update method
+   */
   useEffect(() => {
-    if (pokemonId !== undefined) {
+    if (id !== undefined) {
       PokemonService()
-        .getById(pokemonId)
-        .then((value: AxiosResponse<Pokemon>) => {
+        .getById(id)
+        .then((value: AxiosResponse<PokemonType>) => {
           formik.setValues({
             name: value.data.name.english,
             type: value.data.type[0],
@@ -43,20 +58,19 @@ export default function CreatePage() {
   }, []);
 
   const navigateBackToPage = () => {
-    navigation.dispatch(
-      CommonActions.reset({
-        index: 0,
-        routes: [{ name: "Pokedex" }],
-      })
-    );
+    navigation.navigate("/pokemons");
   };
 
+  /** On submit if pokemon is defined it will update any new values, else if will create a new
+   *  pokemon with the values provided
+   */
   const onSubmit = (values: formikValues) => {
-    const types: Element[] = [values.type as Element];
-    if (values.secondType) {
+    const types: Element[] = [];
+    types.push(values.type as Element);
+    if (values.secondType !== "") {
       types.push(values.secondType as Element);
     }
-    const newPokemon: Pokemon = {
+    const newPokemon: PokemonType = {
       type: types,
       name: {
         english: values.name,
@@ -74,7 +88,7 @@ export default function CreatePage() {
       },
     };
 
-    if (pokemonId === undefined) {
+    if (id === undefined) {
       PokemonService()
         .create(newPokemon)
         .then((_value) => {
@@ -83,9 +97,9 @@ export default function CreatePage() {
         })
         .catch((error: AxiosError) => console.log(error.message));
     } else {
-      newPokemon.id = pokemonId;
+      newPokemon.id = id;
       PokemonService()
-        .update(pokemonId, newPokemon)
+        .update(id, newPokemon)
         .then((_value) => {
           navigateBackToPage();
           navigation.goBack();
@@ -118,192 +132,271 @@ export default function CreatePage() {
   });
 
   return (
-    <SafeAreaView style={styles.screen}>
-      <Appbar.Header>
+    <SafeAreaView style={[styles.screen]}>
+      <ImageBackground />
+      <Appbar.Header style={[styles.topAppBar]}>
         <Appbar.BackAction onPress={() => navigation.goBack()} />
       </Appbar.Header>
+      <View style={styles.titleContainer}>
+        <Text style={styles.title}>{title}</Text>
+      </View>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={styles.listScreen}
+        style={[styles.listScreen]}
       >
         <TextInput
           id="name"
-          style={styles.input}
+          style={[styles.textField]}
+          textColor="#fff"
           label="Name"
           mode="outlined"
           value={formik.values.name}
           error={formik.errors.name !== undefined}
           onChangeText={(name: string) => {
-            formik.setFieldValue("name", name).then(() => {
+            formik.setFieldValue("name", name).then((_) => {
               formik.validateField("name");
             });
           }}
-          theme={inputTheme}
+          theme={{
+            colors: {
+              onSurfaceVariant: "#fff",
+              primary: "#fff",
+            },
+          }}
         />
         {formik.errors.name ? (
           <HelperText type="error" visible={true}>
             {formik.errors.name}
           </HelperText>
-        ) : null}
+        ) : (
+          <></>
+        )}
         <TextInput
           id="type"
-          style={styles.input}
+          style={[styles.textField]}
+          textColor="#fff"
           label="Type"
           mode="outlined"
-          value={formik.values.type}
           error={formik.errors.type !== undefined}
           onChangeText={(type: string) => {
-            formik.setFieldValue("type", type.toUpperCase()).then(() => {
+            formik.setFieldValue("type", type.toUpperCase).then((_) => {
               formik.validateField("type");
             });
           }}
-          theme={inputTheme}
+          theme={{
+            colors: {
+              onSurfaceVariant: "#fff",
+              primary: "#fff",
+            },
+          }}
         />
         {formik.errors.type ? (
           <HelperText type="error" visible={true}>
             {formik.errors.type}
           </HelperText>
-        ) : null}
+        ) : (
+          <></>
+        )}
         <TextInput
           id="secondaryType"
-          style={styles.input}
+          style={[styles.textField]}
+          textColor="#fff"
           label="Secondary Type"
           mode="outlined"
-          value={formik.values.secondType}
           error={formik.errors.secondType !== undefined}
           onChangeText={(type: string) => {
-            formik.setFieldValue("secondType", type.toUpperCase()).then(() => {
-              formik.validateField("secondType");
+            formik.setFieldValue("type", type.toUpperCase).then((_) => {
+              formik.validateField("type");
             });
           }}
-          theme={inputTheme}
+          theme={{
+            colors: {
+              onSurfaceVariant: "#fff",
+              primary: "#fff",
+            },
+          }}
         />
         {formik.errors.secondType ? (
           <HelperText type="error" visible={true}>
             {formik.errors.secondType}
           </HelperText>
-        ) : null}
+        ) : (
+          <></>
+        )}
         <TextInput
           id="hp"
-          style={styles.input}
+          style={[styles.textField]}
+          textColor="#fff"
           label="HP"
           mode="outlined"
           value={formik.values.hp}
           error={formik.errors.hp !== undefined}
           onChangeText={(hp: string) => {
-            formik.setFieldValue("hp", hp).then(() => {
+            formik.setFieldValue("hp", hp).then((_) => {
               formik.validateField("hp");
             });
           }}
-          theme={inputTheme}
+          theme={{
+            colors: {
+              onSurfaceVariant: "#fff",
+              primary: "#fff",
+            },
+          }}
         />
         {formik.errors.hp ? (
           <HelperText type="error" visible={true}>
             {formik.errors.hp}
           </HelperText>
-        ) : null}
+        ) : (
+          <></>
+        )}
         <TextInput
           id="attack"
-          style={styles.input}
+          style={[styles.textField]}
+          textColor="#fff"
           label="Attack"
           mode="outlined"
           value={formik.values.attack}
           error={formik.errors.attack !== undefined}
           onChangeText={(attack: string) => {
-            formik.setFieldValue("attack", attack).then(() => {
+            formik.setFieldValue("attack", attack).then((_) => {
               formik.validateField("attack");
             });
           }}
-          theme={inputTheme}
+          theme={{
+            colors: {
+              onSurfaceVariant: "#fff",
+              primary: "#fff",
+            },
+          }}
         />
         {formik.errors.attack ? (
           <HelperText type="error" visible={true}>
             {formik.errors.attack}
           </HelperText>
-        ) : null}
+        ) : (
+          <></>
+        )}
         <TextInput
           id="defense"
-          style={styles.input}
+          style={[styles.textField]}
+          textColor="#fff"
           label="Defense"
           mode="outlined"
           value={formik.values.defense}
           error={formik.errors.defense !== undefined}
           onChangeText={(defense: string) => {
-            formik.setFieldValue("defense", defense).then(() => {
+            formik.setFieldValue("defense", defense).then((_) => {
               formik.validateField("defense");
             });
           }}
-          theme={inputTheme}
+          theme={{
+            colors: {
+              onSurfaceVariant: "#fff",
+              primary: "#fff",
+            },
+          }}
         />
         {formik.errors.defense ? (
           <HelperText type="error" visible={true}>
             {formik.errors.defense}
           </HelperText>
-        ) : null}
+        ) : (
+          <></>
+        )}
         <TextInput
           id="SpAtk"
-          style={styles.input}
+          style={[styles.textField]}
+          textColor="#fff"
           label="Sp. Attack"
           mode="outlined"
           value={formik.values.SpAtk}
           error={formik.errors.SpAtk !== undefined}
           onChangeText={(SpAtk: string) => {
-            formik.setFieldValue("SpAtk", SpAtk).then(() => {
+            formik.setFieldValue("SpAtk", SpAtk).then((_) => {
               formik.validateField("SpAtk");
             });
           }}
-          theme={inputTheme}
+          theme={{
+            colors: {
+              onSurfaceVariant: "#fff",
+              primary: "#fff",
+            },
+          }}
         />
         {formik.errors.SpAtk ? (
           <HelperText type="error" visible={true}>
             {formik.errors.SpAtk}
           </HelperText>
-        ) : null}
+        ) : (
+          <></>
+        )}
         <TextInput
           id="SpDef"
-          style={styles.input}
+          style={[styles.textField]}
+          textColor="#fff"
           label="Sp. Defense"
           mode="outlined"
           value={formik.values.SpDef}
           error={formik.errors.SpDef !== undefined}
           onChangeText={(SpDef: string) => {
-            formik.setFieldValue("SpDef", SpDef).then(() => {
+            formik.setFieldValue("SpDef", SpDef).then((_) => {
               formik.validateField("SpDef");
             });
           }}
-          theme={inputTheme}
+          theme={{
+            colors: {
+              onSurfaceVariant: "#fff",
+              primary: "#fff",
+            },
+          }}
         />
         {formik.errors.SpDef ? (
           <HelperText type="error" visible={true}>
             {formik.errors.SpDef}
           </HelperText>
-        ) : null}
+        ) : (
+          <></>
+        )}
         <TextInput
           id="speed"
-          style={styles.input}
+          style={[styles.textField]}
+          textColor="#fff"
           label="Speed"
           mode="outlined"
           value={formik.values.speed}
           error={formik.errors.speed !== undefined}
           onChangeText={(speed: string) => {
-            formik.setFieldValue("speed", speed).then(() => {
+            formik.setFieldValue("speed", speed).then((_) => {
               formik.validateField("speed");
             });
           }}
-          theme={inputTheme}
+          theme={{
+            colors: {
+              onSurfaceVariant: "#fff",
+              primary: "#fff",
+            },
+          }}
         />
         {formik.errors.speed ? (
           <HelperText type="error" visible={true}>
             {formik.errors.speed}
           </HelperText>
-        ) : null}
+        ) : (
+          <></>
+        )}
         <Button
           style={styles.button}
-          onPress={() => {
+          theme={{
+            colors: {
+              primary: "#000",
+            },
+          }}
+          onPress={(_) => {
             formik.handleSubmit();
           }}
         >
-          {buttonText}
+          Submit
         </Button>
       </ScrollView>
     </SafeAreaView>
@@ -312,19 +405,40 @@ export default function CreatePage() {
 
 const styles = StyleSheet.create({
   screen: {
-    flex: 1,
+    display: "flex",
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgb(42, 42, 42)",
   },
   listScreen: {
-    paddingHorizontal: 32,
+    paddingHorizontal: 64,
   },
-  input: {
-    fontStyle: "normal",
-    fontWeight: "400",
-    color: "#FFFFFF",
-    fontSize: 16,
-    lineHeight: 24,
-    letterSpacing: 0.5,
-    marginBottom: 10,
+  topAppBar: {
+    backgroundColor: "rgba(255, 255, 255, 0.0)",
+  },
+  titleContainer: {
+    alignItems: "center",
+    marginVertical: 20,
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  backgroundImage: {
+    flex: 1,
+    width: Dimensions.get("window").width,
+    height: Dimensions.get("window").height + 100,
+  },
+  image: {
+    width: "100%",
+    height: 100,
+    marginTop: 64,
+    marginBottom: 32,
+  },
+  textField: {
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    marginBottom: 16,
   },
   button: {
     backgroundColor: "#FFCB05",
@@ -336,13 +450,6 @@ const styles = StyleSheet.create({
     marginBottom: 32,
   },
 });
-
-const inputTheme = {
-  colors: {
-    onSurfaceVariant: "#fff",
-    primary: "#fff",
-  },
-};
 
 type formikValues = {
   name: string;
@@ -358,6 +465,7 @@ type formikValues = {
 
 const validNum = yup
   .number()
+  .required("Required")
   .typeError("Enter a Valid Number")
   .positive("Enter a Positive Number");
 

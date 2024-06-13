@@ -5,6 +5,8 @@ import { Searchbar } from "react-native-paper";
 import Pokemon from "../../types/Pokemon";
 import PokemonService from "../../services/PokemonService";
 import PokemonCard from "../organisms/PokemonCard";
+import NavBar from "../molecules/NavBar";
+import React from "react";
 
 export default function PokedexPage() {
   const [searchQuery, setSearchQuery] = useState("");
