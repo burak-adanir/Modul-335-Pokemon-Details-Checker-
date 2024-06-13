@@ -7,6 +7,10 @@ import * as Yup from "yup";
 import UserService from "../../services/UserService";
 import { useNavigation } from "@react-navigation/native";
 
+/** Registration page which passes an email, first name, last name,
+ * age and password to create a new user.
+ */
+
 const validationSchema = Yup.object().shape({
   email: Yup.string()
     .email("Please enter a valid email !!!")

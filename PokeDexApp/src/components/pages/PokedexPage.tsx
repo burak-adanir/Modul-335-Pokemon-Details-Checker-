@@ -1,6 +1,5 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import { useEffect, useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { Searchbar } from "react-native-paper";
 import Pokemon from "../../types/Pokemon";
 import PokemonService from "../../services/PokemonService";
@@ -8,11 +7,13 @@ import PokemonCard from "../organisms/PokemonCard";
 import NavBar from "../molecules/NavBar";
 import React from "react";
 
+/** Page that passes all existing pokemon. Also includes buttons to edit and delete
+ *  each pokemon and a search bar to filter by name. */
+
 export default function PokedexPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredList, setFilteredList] = useState<Pokemon[]>([]);
   const [pokemonList, setPokemonList] = useState<Pokemon[]>([]);
-  const [refreshing, setRefreshing] = useState(false);
 
   const onChangeSearch = (query: string) => {
     setSearchQuery(query);
