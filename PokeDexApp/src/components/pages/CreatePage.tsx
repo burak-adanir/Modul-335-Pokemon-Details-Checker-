@@ -165,7 +165,7 @@ export default function CreatePage() {
           }}
         />
         {formik.errors.name ? (
-          <HelperText type="error" visible={true}>
+          <HelperText style={styles.helperText} type="error" visible={true}>
             {formik.errors.name}
           </HelperText>
         ) : (
@@ -179,7 +179,7 @@ export default function CreatePage() {
           mode="outlined"
           error={formik.errors.type !== undefined}
           onChangeText={(type: string) => {
-            formik.setFieldValue("type", type.toUpperCase).then((_) => {
+            formik.setFieldValue("type", type).then((_) => {
               formik.validateField("type");
             });
           }}
@@ -191,7 +191,7 @@ export default function CreatePage() {
           }}
         />
         {formik.errors.type ? (
-          <HelperText type="error" visible={true}>
+          <HelperText style={styles.helperText} type="error" visible={true}>
             {formik.errors.type}
           </HelperText>
         ) : (
@@ -201,12 +201,12 @@ export default function CreatePage() {
           id="secondaryType"
           style={[styles.textField]}
           textColor="#fff"
-          label="Secondary Type"
+          label="Type (optional)"
           mode="outlined"
           error={formik.errors.secondType !== undefined}
           onChangeText={(type: string) => {
-            formik.setFieldValue("type", type.toUpperCase).then((_) => {
-              formik.validateField("type");
+            formik.setFieldValue("secondType", type).then((_) => {
+              formik.validateField("secondType");
             });
           }}
           theme={{
@@ -217,7 +217,7 @@ export default function CreatePage() {
           }}
         />
         {formik.errors.secondType ? (
-          <HelperText type="error" visible={true}>
+          <HelperText style={styles.helperText} type="error" visible={true}>
             {formik.errors.secondType}
           </HelperText>
         ) : (
@@ -244,7 +244,7 @@ export default function CreatePage() {
           }}
         />
         {formik.errors.hp ? (
-          <HelperText type="error" visible={true}>
+          <HelperText style={styles.helperText} type="error" visible={true}>
             {formik.errors.hp}
           </HelperText>
         ) : (
@@ -271,7 +271,7 @@ export default function CreatePage() {
           }}
         />
         {formik.errors.attack ? (
-          <HelperText type="error" visible={true}>
+          <HelperText style={styles.helperText} type="error" visible={true}>
             {formik.errors.attack}
           </HelperText>
         ) : (
@@ -298,7 +298,7 @@ export default function CreatePage() {
           }}
         />
         {formik.errors.defense ? (
-          <HelperText type="error" visible={true}>
+          <HelperText style={styles.helperText} type="error" visible={true}>
             {formik.errors.defense}
           </HelperText>
         ) : (
@@ -325,7 +325,7 @@ export default function CreatePage() {
           }}
         />
         {formik.errors.SpAtk ? (
-          <HelperText type="error" visible={true}>
+          <HelperText style={styles.helperText} type="error" visible={true}>
             {formik.errors.SpAtk}
           </HelperText>
         ) : (
@@ -352,7 +352,7 @@ export default function CreatePage() {
           }}
         />
         {formik.errors.SpDef ? (
-          <HelperText type="error" visible={true}>
+          <HelperText style={styles.helperText} type="error" visible={true}>
             {formik.errors.SpDef}
           </HelperText>
         ) : (
@@ -379,7 +379,7 @@ export default function CreatePage() {
           }}
         />
         {formik.errors.speed ? (
-          <HelperText type="error" visible={true}>
+          <HelperText style={styles.helperText} type="error" visible={true}>
             {formik.errors.speed}
           </HelperText>
         ) : (
@@ -448,6 +448,9 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     alignSelf: "center",
     marginBottom: 32,
+  },
+  helperText: {
+    marginTop: -15,
   },
 });
 

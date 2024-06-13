@@ -33,6 +33,7 @@ export default function PokedexPage() {
   }, []);
 
   return (
+    <SafeAreaView>
       <View style={styles.container}>
         <Searchbar
           style={styles.searchBar}
@@ -47,6 +48,7 @@ export default function PokedexPage() {
         />
         <NavBar />
       </View>
+    </SafeAreaView>
   );
 }
 
